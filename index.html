@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hasta-Shilpa Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f5f5;
+      color: #222;
+    }
+
+    header {
+      background: #4b2e83;
+      color: white;
+      padding: 18px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-around;
+      background: white;
+      padding: 12px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+    }
+
+    nav button {
+      padding: 10px 15px;
+      border: none;
+      background: #4b2e83;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .screen {
+      display: none;
+      padding: 20px;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .card {
+      background: white;
+      padding: 18px;
+      margin-bottom: 18px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+
+    button.action {
+      background: #4b2e83;
+      color: white;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .result {
+      background: #e8f5e9;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<header>Hasta-Shilpa</header>
+
+<nav>
+  <button onclick="showScreen('home')">Home</button>
+  <button onclick="showScreen('blueprint')">Blueprint</button>
+  <button onclick="showScreen('tracker')">Tracker</button>
+  <button onclick="showScreen('price')">Price</button>
+  <button onclick="showScreen('market')">Market</button>
+</nav>
+
+<div id="home" class="screen active">
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1517705008128-361805f42e86?q=80&w=1200&auto=format&fit=crop" alt="Bamboo Product">
+    <h2>Bamboo Laptop Stand</h2>
+    <p>Modern eco-friendly laptop stand crafted using bamboo.</p>
+    <button class="action" onclick="showScreen('blueprint')">View Blueprint</button>
+  </div>
+
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop" alt="Lamp Shade">
+    <h2>Cane Lamp Shade</h2>
+    <p>Stylish handcrafted lamp shade suitable for urban interiors.</p>
+    <button class="action" onclick="showScreen('blueprint')">View Blueprint</button>
+  </div>
+</div>
+
+<div id="blueprint" class="screen">
+  <div class="card">
+    <h2>Blueprint View</h2>
+    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop" alt="Blueprint">
+    <p><strong>Measurements:</strong> 30cm × 15cm × 10cm</p>
+    <p><strong>Materials:</strong> Bamboo Poles, Cane Binding, Natural Polish</p>
+    <button class="action" onclick="alert('Blueprint Downloaded Successfully')">Download Blueprint</button>
+  </div>
+</div>
+
+<div id="tracker" class="screen">
+  <div class="card">
+    <h2>Material Tracker</h2>
+
+    <input type="number" id="bamboo" placeholder="Number of Bamboo Poles">
+    <input type="number" id="binding" placeholder="Binding Material Cost">
+    <input type="number" id="extra" placeholder="Extra Costs">
+
+    <button class="action" onclick="saveMaterials()">Save Entry</button>
+
+    <div id="materialResult"></div>
+  </div>
+</div>
+
+<div id="price" class="screen">
+  <div class="card">
+    <h2>Price Suggester</h2>
+
+    <input type="number" id="materialCost" placeholder="Material Cost">
+    <input type="number" id="hours" placeholder="Hours Worked">
+    <input type="number" id="hourRate" placeholder="Cost Per Hour">
+
+    <button class="action" onclick="calculatePrice()">Calculate Price</button>
+
+    <div id="priceResult"></div>
+  </div>
+</div>
+
+<div id="market" class="screen">
+  <div class="card">
+    <h2>Marketplace</h2>
+    <p>Upload and display handcrafted products.</p>
+
+    <input type="text" id="productName" placeholder="Product Name">
+    <input type="number" id="productPrice" placeholder="Price">
+    <textarea id="productDesc" placeholder="Product Description"></textarea>
+
+    <button class="action" onclick="addProduct()">Add Product</button>
+
+    <div id="marketList"></div>
+  </div>
+</div>
+
+<script>
+  function showScreen(screenId) {
+    const screens = document.querySelectorAll('.screen');
+    screens.forEach(screen => {
+      screen.classList.remove('active');
+    });
+
+    document.getElementById(screenId).classList.add('active');
+  }
+
+  function calculatePrice() {
+    const material = parseFloat(document.getElementById('materialCost').value) || 0;
+    const hours = parseFloat(document.getElementById('hours').value) || 0;
+    const rate = parseFloat(document.getElementById('hourRate').value) || 0;
+
+    const total = material + (hours * rate);
+
+    document.getElementById('priceResult').innerHTML =
+      `<div class="result">Suggested Price: ₹${total}</div>`;
+  }
+
+  function saveMaterials() {
+    const bamboo = document.getElementById('bamboo').value;
+    const binding = document.getElementById('binding').value;
+    const extra = document.getElementById('extra').value;
+
+    document.getElementById('materialResult').innerHTML =
+      `<div class="result">Saved: ${bamboo} Bamboo Poles | Binding ₹${binding} | Extra ₹${extra}</div>`;
+  }
+
+  function addProduct() {
+    const name = document.getElementById('productName').value;
+    const price = document.getElementById('productPrice').value;
+    const desc = document.getElementById('productDesc').value;
+
+    if(name === '') {
+      alert('Please enter product name');
+      return;
+    }
+
+    const item = document.createElement('div');
+    item.className = 'card';
+    item.innerHTML = `
+      <h3>${name}</h3>
+      <p><strong>Price:</strong> ₹${price}</p>
+      <p>${desc}</p>
+    `;
+
+    document.getElementById('marketList').appendChild(item);
+
+    document.getElementById('productName').value = '';
+    document.getElementById('productPrice').value = '';
+    document.getElementById('productDesc').value = '';
+  }
+</script>
+
+</body>
+</html>
