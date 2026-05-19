@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hasta-Shilpa Live Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f4f7f6;
+color:#222;
+}
+
+header{
+background:linear-gradient(135deg,#5c3d2e,#8d6748);
+color:white;
+padding:22px;
+text-align:center;
+position:sticky;
+top:0;
+z-index:1000;
+box-shadow:0 4px 12px rgba(0,0,0,0.15);
+}
+
+header h1{
+font-size:30px;
+margin-bottom:5px;
+}
+
+header p{
+font-size:14px;
+opacity:0.9;
+}
+
+nav{
+display:flex;
+overflow-x:auto;
+gap:10px;
+padding:15px;
+background:white;
+position:sticky;
+top:95px;
+z-index:999;
+box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
+
+nav button{
+background:#5c3d2e;
+color:white;
+border:none;
+padding:12px 18px;
+border-radius:12px;
+cursor:pointer;
+font-weight:500;
+transition:0.3s;
+white-space:nowrap;
+}
+
+nav button:hover{
+background:#7a533c;
+transform:scale(1.03);
+}
+
+.container{
+padding:20px;
+max-width:1200px;
+margin:auto;
+}
+
+.screen{
+display:none;
+animation:fade 0.4s ease;
+}
+
+.active{
+display:block;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(10px);} 
+to{opacity:1;transform:translateY(0);}
+}
+
+.hero{
+background:linear-gradient(135deg,#8d6748,#c4a484);
+padding:35px;
+border-radius:24px;
+color:white;
+margin-bottom:25px;
+box-shadow:0 8px 24px rgba(0,0,0,0.12);
+}
+
+.hero h2{
+font-size:32px;
+margin-bottom:12px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:20px;
+}
+
+.card{
+background:white;
+border-radius:22px;
+padding:18px;
+box-shadow:0 4px 15px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-4px);
+}
+
+.card img{
+width:100%;
+height:200px;
+object-fit:cover;
+border-radius:16px;
+margin-bottom:15px;
+}
+
+.card h3{
+margin-bottom:10px;
+}
+
+.card p{
+font-size:14px;
+line-height:1.6;
+color:#555;
+}
+
+.action-btn{
+margin-top:14px;
+background:#5c3d2e;
+color:white;
+border:none;
+padding:12px 18px;
+border-radius:12px;
+cursor:pointer;
+font-weight:500;
+width:100%;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
+margin-bottom:25px;
+}
+
+.stat-card{
+background:white;
+padding:20px;
+border-radius:18px;
+text-align:center;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.stat-card h2{
+color:#8d6748;
+font-size:28px;
+margin-bottom:8px;
+}
+
+input,textarea,select{
+width:100%;
+padding:14px;
+border-radius:12px;
+border:1px solid #ddd;
+margin-top:10px;
+margin-bottom:15px;
+font-size:14px;
+}
+
+.result{
+background:#e7f7ed;
+padding:16px;
+border-radius:12px;
+font-weight:600;
+margin-top:10px;
+}
+
+.market-item{
+margin-top:15px;
+padding:15px;
+background:#fafafa;
+border-radius:12px;
+border:1px solid #eee;
+}
+
+footer{
+text-align:center;
+padding:30px;
+color:#777;
+font-size:14px;
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Hasta-Shilpa</h1>
+<p>Modern Design Bridge for Bamboo & Cane Artisans</p>
+</header>
+
+<nav>
+<button onclick="showScreen('home')">Dashboard</button>
+<button onclick="showScreen('designs')">Design Library</button>
+<button onclick="showScreen('blueprint')">Blueprints</button>
+<button onclick="showScreen('tracker')">Material Tracker</button>
+<button onclick="showScreen('price')">Price Suggester</button>
+<button onclick="showScreen('market')">Marketplace</button>
+<button onclick="showScreen('profile')">Artisan Profile</button>
+</nav>
+
+<div class="container">
+
+<div id="home" class="screen active">
+<div class="hero">
+<h2>Empowering Traditional Artisans</h2>
+<p>Hasta-Shilpa helps bamboo and cane artisans discover modern product trends, calculate pricing, manage materials, and digitally showcase handcrafted products.</p>
+</div>
+
+<div class="stats">
+<div class="stat-card">
+<h2>120+</h2>
+<p>Design Inspirations</p>
+</div>
+<div class="stat-card">
+<h2>45</h2>
+<p>Active Artisans</p>
+</div>
+<div class="stat-card">
+<h2>₹2.4L</h2>
+<p>Marketplace Sales</p>
+</div>
+<div class="stat-card">
+<h2>89%</h2>
+<p>Sustainable Materials</p>
+</div>
+</div>
+
+<div class="grid">
+<div class="card">
+<img src="https://images.unsplash.com/photo-1517705008128-361805f42e86?q=80&w=1200&auto=format&fit=crop">
+<h3>Bamboo Laptop Stand</h3>
+<p>Modern ergonomic laptop stand made using treated bamboo poles.</p>
+<button class="action-btn" onclick="showScreen('blueprint')">View Blueprint</button>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop">
+<h3>Cane Lamp Shade</h3>
+<p>Decorative handcrafted lamp shades designed for urban interiors.</p>
+<button class="action-btn" onclick="showScreen('blueprint')">View Blueprint</button>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1493666438817-866a91353ca9?q=80&w=1200&auto=format&fit=crop">
+<h3>Bamboo Storage Basket</h3>
+<p>Eco-friendly storage baskets with premium finishing.</p>
+<button class="action-btn" onclick="showScreen('market')">Sell Product</button>
+</div>
+</div>
+</div>
+
+<div id="designs" class="screen">
+<h2 style="margin-bottom:20px;">Trending Design Library</h2>
+<div class="grid">
+<div class="card">
+<img src="https://images.unsplash.com/photo-1484101403633-562f891dc89a?q=80&w=1200&auto=format&fit=crop">
+<h3>Minimal Bamboo Chair</h3>
+<p>Modern chair design suitable for cafes and apartments.</p>
+</div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1200&auto=format&fit=crop">
+<h3>Decorative Wall Shelf</h3>
+<p>Handcrafted wall shelves using natural cane weaving.</p>
+</div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop">
+<h3>Luxury Lamp Collection</h3>
+<p>Premium lighting designs inspired by sustainable interiors.</p>
+</div>
+</div>
+</div>
+
+<div id="blueprint" class="screen">
+<div class="card">
+<h2>Blueprint & Measurements</h2>
+<img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop">
+<p><strong>Dimensions:</strong> 30cm × 15cm × 12cm</p>
+<p><strong>Material:</strong> Bamboo Poles, Cane Binding, Natural Polish</p>
+<p><strong>Estimated Build Time:</strong> 4 Hours</p>
+<button class="action-btn" onclick="alert('Blueprint Downloaded Successfully')">Download Blueprint</button>
+</div>
+</div>
+
+<div id="tracker" class="screen">
+<div class="card">
+<h2>Material Usage Tracker</h2>
+<input type="number" id="bamboo" placeholder="Bamboo Poles Used">
+<input type="number" id="binding" placeholder="Binding Material Cost">
+<input type="number" id="labor" placeholder="Labor Charges">
+<input type="number" id="extra" placeholder="Extra Costs">
+<button class="action-btn" onclick="saveMaterials()">Save Usage</button>
+<div id="materialResult"></div>
+</div>
+</div>
+
+<div id="price" class="screen">
+<div class="card">
+<h2>AI Price Suggestion</h2>
+<input type="number" id="materialCost" placeholder="Material Cost">
+<input type="number" id="hours" placeholder="Hours Worked">
+<input type="number" id="hourRate" placeholder="Hourly Rate">
+<select id="profitMargin">
+<option value="10">10% Profit</option>
+<option value="20">20% Profit</option>
+<option value="30">30% Profit</option>
+</select>
+<button class="action-btn" onclick="calculatePrice()">Generate Price</button>
+<div id="priceResult"></div>
+</div>
+</div>
+
+<div id="market" class="screen">
+<div class="card">
+<h2>Marketplace</h2>
+<input type="text" id="productName" placeholder="Product Name">
+<input type="number" id="productPrice" placeholder="Product Price">
+<textarea id="productDesc" placeholder="Product Description"></textarea>
+<button class="action-btn" onclick="addProduct()">Publish Product</button>
+<div id="marketList"></div>
+</div>
+</div>
+
+<div id="profile" class="screen">
+<div class="card">
+<h2>Artisan Profile</h2>
+<p><strong>Name:</strong> Ravi Kumar</p>
+<p><strong>Specialization:</strong> Bamboo Furniture & Decorative Crafts</p>
+<p><strong>Village:</strong> Western Ghats Region</p>
+<p><strong>Products Sold:</strong> 128</p>
+<p><strong>Average Rating:</strong> ⭐ 4.8</p>
+<button class="action-btn">Edit Profile</button>
+</div>
+</div>
+
+</div>
+
+<footer>
+Hasta-Shilpa © 2026 | Sustainable Craft Innovation Platform
+</footer>
+
+<script>
+function showScreen(screenId){
+const screens=document.querySelectorAll('.screen');
+screens.forEach(screen=>screen.classList.remove('active'));
+document.getElementById(screenId).classList.add('active');
+window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function saveMaterials(){
+const bamboo=document.getElementById('bamboo').value;
+const binding=document.getElementById('binding').value;
+const labor=document.getElementById('labor').value;
+const extra=document.getElementById('extra').value;
+
+document.getElementById('materialResult').innerHTML=
+`<div class="result">Saved Successfully ✔<br>Bamboo Poles: ${bamboo}<br>Binding Cost: ₹${binding}<br>Labor: ₹${labor}<br>Extra: ₹${extra}</div>`;
+}
+
+function calculatePrice(){
+const material=parseFloat(document.getElementById('materialCost').value)||0;
+const hours=parseFloat(document.getElementById('hours').value)||0;
+const rate=parseFloat(document.getElementById('hourRate').value)||0;
+const margin=parseFloat(document.getElementById('profitMargin').value)||0;
+
+let base=material+(hours*rate);
+let total=base+(base*margin/100);
+
+document.getElementById('priceResult').innerHTML=
+`<div class="result">Suggested Selling Price: ₹${total.toFixed(2)}</div>`;
+}
+
+function addProduct(){
+const name=document.getElementById('productName').value;
+const price=document.getElementById('productPrice').value;
+const desc=document.getElementById('productDesc').value;
+
+if(name===''){
+alert('Enter product name');
+return;
+}
+
+const item=document.createElement('div');
+item.className='market-item';
+item.innerHTML=`
+<h3>${name}</h3>
+<p><strong>Price:</strong> ₹${price}</p>
+<p>${desc}</p>
+`;
+
+document.getElementById('marketList').appendChild(item);
+
+document.getElementById('productName').value='';
+document.getElementById('productPrice').value='';
+document.getElementById('productDesc').value='';
+}
+</script>
+
+</body>
+</html>
